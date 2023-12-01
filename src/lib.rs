@@ -452,7 +452,6 @@ impl Form {
                     .unwrap();
 
                 field.set("V", Object::string_literal(s.into_bytes()));
-                field.set("Ff", Object::Integer(1));
 
                 // Regenerate text appearance confoming the new text but ignore the result
                 let _ = self.regenerate_text_appearance(n);
@@ -484,6 +483,8 @@ impl Form {
 
         // The value of the object (should be a string)
         let value = field.get(b"V")?.to_owned();
+        println!("{:#?}", value);
+
 
         // The default appearance of the object (should be a string)
         let da = field.get(b"DA")?.to_owned();
@@ -518,6 +519,9 @@ impl Form {
             "bt", "tc", "tw", "tz", "g", "tm", "tr", "tf", "tj", "et", "q", "bmc", "emc",
         ];
 
+        let my_operators = vec![
+            "tc", "tw", "tz", "g", "tr",  "et",
+        ];
         // Remove these ignored operators as we have to generate the text and fonts again
         content.operations.retain(|operation| {
             !ignored_operators.contains(&operation.operator.to_lowercase().as_str())
@@ -581,6 +585,7 @@ impl Form {
         )]);
 
         // Set the text value and some finalizing operations
+        println!("{:#?}", content.operations);
         content.operations.append(&mut vec![
             Operation::new("Tj", vec![value]),
             Operation::new("ET", vec![]),
