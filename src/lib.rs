@@ -228,6 +228,14 @@ impl Form {
         }
     }
 
+    pub fn set_need_appearances(form: &mut Self) -> Result<&mut Self, LoadError> {
+        let root_dict = form.document.trailer.get(b"Root")?.as_dict()?;
+        let acroform_id = root_dict.get(b"Acroform")?;
+        let acroform_dict = form.document.get_object_mut(acroform_id.as_reference()?)?.as_dict_mut()?;
+        acroform_dict.set("NeedAppearances", lopdf::Object::Boolean(true));
+        Ok(form)
+    } 
+
     /// Gets the name of field of the given index
     ///
     /// # Panics
