@@ -454,7 +454,7 @@ impl Form {
                 field.set("V", Object::string_literal(s.into_bytes()));
 
                 // Regenerate text appearance confoming the new text but ignore the result
-                let _ = self.regenerate_text_appearance(n);
+//                let _ = self.regenerate_text_appearance(n);
 
                 Ok(())
             }
