@@ -593,6 +593,8 @@ impl Form {
             Operation::new("EMC", vec![]),
         ]);
 
+        println!("{:#?}", content );
+
         // Set the new content to the original stream and compress it
         if let Ok(encoded_content) = content.encode() {
             stream.set_plain_content(encoded_content);
