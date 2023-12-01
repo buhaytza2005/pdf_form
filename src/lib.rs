@@ -533,6 +533,7 @@ impl Form {
             Object::String(ref bytes, _) => Some(from_utf8(bytes)?),
             _ => None,
         });
+        println!("{:#?}", font);
 
         // Define some helping font variables
         let font_name = (font.0).0;
