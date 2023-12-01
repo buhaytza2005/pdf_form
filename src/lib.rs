@@ -452,6 +452,7 @@ impl Form {
                     .unwrap();
 
                 field.set("V", Object::string_literal(s.into_bytes()));
+                field.set("Ff", Object::Integer(1));
 
                 // Regenerate text appearance confoming the new text but ignore the result
                 let _ = self.regenerate_text_appearance(n);
@@ -583,7 +584,7 @@ impl Form {
         content.operations.append(&mut vec![
             Operation::new("Tj", vec![value]),
             Operation::new("ET", vec![]),
-            Operation::new("Q", vec![]),
+            //Operation::new("Q", vec![]),
             Operation::new("EMC", vec![]),
         ]);
 
